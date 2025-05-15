@@ -163,7 +163,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Tu Nombre</h1>
+            <h1>Esau Leal Garcia</h1>
             <p class="tagline">Diseñador Gráfico & Marketing Digital</p>
             <a href="#contact" class="btn">Contacto</a>
         </div>
@@ -171,7 +171,10 @@
 
     <section id="about" class="container">
         <h2>Sobre Mí</h2>
-        <p>Diseñador Gráfico y Marketing Digital con experiencia en creación de identidad visual, contenido para redes sociales y estrategias digitales. Especializado en branding, diseño web y análisis de métricas para optimizar resultados.</p>
+        <p>Diseñador Gráfico y Marketing Digital con experiencia en diseño de identidad visual, creación de contenido para redes
+            sociales y desarrollo de materiales gráficos para e-Commerce. Dominio de Adobe Creative Suite, automatización de
+            procesos creativos y análisis de métricas. Habilidades en maquetación web (HTML/CSS) y estrategias digitales para
+            potenciar la comunicación de marcas.</p>
     </section>
 
     <section id="skills" class="container">
@@ -224,18 +227,27 @@
             <h2>Contacto</h2>
             <p>¿Interesado en trabajar juntos? ¡Hablemos!</p>
             <div style="margin-top: 2rem;">
-                <a href="mailto:tuemail@ejemplo.com" class="btn">Enviar Email</a>
+                <a href="mailto:esau.leal94@gmail.com" class="btn">Enviar Email</a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 Tu Nombre. Todos los derechos reservados.</p>
+            <p>&copy; <span id="currentyear"></span> Esau Leal | Todos los derechos reservados</p>
         </div>
     </footer>
 
     <script>
+        window.addEventListener('load',(currentyear)=>{
+    date = new Date();
+    document.querySelector("#currentyear").textContent = date.getFullYear();
+});
+//Alternar modo oscuro/nocturno
+document.querySelector('.sonar-effect').addEventListener('click', function() {
+    document.body.classList.toggle('night-vision');
+    // (Necesitarías definir la clase .night-vision en tu CSS)
+});
         // JS para efectos interactivos
         document.addEventListener('DOMContentLoaded', function() {
             // Animación al hacer scroll

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Diseñador Gráfico & Marketing Digital</title>
+    <style>
+        /* CSS */
+        :root {
+            --primary: #2a3f54; /* Azul profesional */
+            --secondary: #e74c3c; /* Rojo para destacar */
+            --light: #f9f9f9;
+            --dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #1e2b38);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+        
+        /* Sección "Sobre mí" */
+        #about {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Sección Habilidades */
+        #skills {
+            background-color: white;
+            padding: 4rem 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .skill-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Sección Proyectos */
+        #projects {
+            padding: 4rem 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        /* Contacto */
+        #contact {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Tu Nombre</h1>
+            <p class="tagline">Diseñador Gráfico & Marketing Digital</p>
+            <a href="#contact" class="btn">Contacto</a>
+        </div>
+    </header>
+
+    <section id="about" class="container">
+        <h2>Sobre Mí</h2>
+        <p>Diseñador Gráfico y Marketing Digital con experiencia en creación de identidad visual, contenido para redes sociales y estrategias digitales. Especializado en branding, diseño web y análisis de métricas para optimizar resultados.</p>
+    </section>
+
+    <section id="skills" class="container">
+        <h2>Habilidades</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Diseño Gráfico</h3>
+                <p>Adobe Photoshop, Illustrator, InDesign, Figma, Canva</p>
+            </div>
+            <div class="skill-card">
+                <h3>Marketing Digital</h3>
+                <p>Meta Ads, Google Analytics, SEO, Email Marketing</p>
+            </div>
+            <div class="skill-card">
+                <h3>Desarrollo Web</h3>
+                <p>HTML5, CSS3, WordPress, UI/UX Básico</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2>Proyectos Destacados</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://via.placeholder.com/600x400" alt="Proyecto 1">
+                <div class="project-info">
+                    <h3>Branding Corporativo</h3>
+                    <p>Diseño de identidad visual para GRN Seguridad Privada</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/600x400" alt="Proyecto 2">
+                <div class="project-info">
+                    <h3>Campaña Digital</h3>
+                    <p>Estrategia de redes sociales para Cabo Servicios Aduanales</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/600x400" alt="Proyecto 3">
+                <div class="project-info">
+                    <h3>Diseño Web</h3>
+                    <p>Maquetación responsive para sitio e-Commerce</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>¿Interesado en trabajar juntos? ¡Hablemos!</p>
+            <div style="margin-top: 2rem;">
+                <a href="mailto:tuemail@ejemplo.com" class="btn">Enviar Email</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Tu Nombre. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JS para efectos interactivos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación al hacer scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.skill-card, .project-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Inicializar opacidad para animación
+            document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Ejecutar al cargar
+        });
+    </script>
+</body>
+</html>

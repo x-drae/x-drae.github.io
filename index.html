@@ -5,10 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio | Diseñador Gráfico & Marketing Digital</title>
     <style>
-        /* CSS */
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            width: 100%;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            background: #f5f5f5;
+        }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(42, 63, 84, 0.9);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Controles */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            background: rgba(0,0,0,0.2);
+            user-select: none;
+        }
+        
+        .next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .prev {
+            left: 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .prev:hover, .next:hover {
+            background: rgba(231, 76, 60, 0.8);
+        }
+        
+        /* Puntos indicadores */
+        .dots-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        
+        .active, .dot:hover {
+            background-color: #e74c3c;
+        }
+        
+        /* Animación fade */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1s;
+        }
+        
+        @keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+
+        /* CSS General */
         :root {
-            --primary: #2a3f54; /* Azul profesional */
-            --secondary: #e74c3c; /* Rojo para destacar */
+            --primary: #2a3f54;
+            --secondary: #e74c3c;
             --light: #f9f9f9;
             --dark: #333;
         }
@@ -79,7 +174,7 @@
         
         /* Sección Habilidades */
         #skills {
-            background-color: white;
+            background-color: #f9f9f9;
             padding: 4rem 0;
         }
         
@@ -115,11 +210,14 @@
             margin-top: 2rem;
         }
         
+        /* Modificaciones para project-card con video */
         .project-card {
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
+            cursor: pointer;
         }
         
         .project-card:hover {
@@ -130,11 +228,145 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
+            display: block;
+        }
+        
+        .project-card .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover .play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
         }
         
         .project-info {
             padding: 1.5rem;
             background: white;
+        }
+        
+        .video-label {
+            display: block;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        
+        /* Modal para video */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .video-container video {
+            width: 100%;
+            border-radius: 8px;
+            outline: none;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        /* Sección Logos */
+        #logos {
+            background-color:  #f9f9f9;
+            padding: 4rem 0;
+        }
+        
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .logo-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .logo-item img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: contain;
+        }
+        
+        /* Sección Redes Sociales */
+        #redes-sociales {
+            padding: 4rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .redes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .redes-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .redes-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .redes-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
         
         /* Contacto */
@@ -156,6 +388,86 @@
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
+            }
+            
+            .video-container {
+                width: 95%;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .logos-grid, .redes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+         /* Modal para imágenes */
+         .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .image-container {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+        
+        .image-container img {
+            width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .close-image-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Efecto de zoom al pasar el mouse */
+        .logo-item img, .redes-item img {
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover img, .redes-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            /* ... (otros estilos responsive se mantienen) ... */
+            
+            .image-container {
+                width: 95%;
+            }
+            
+            .close-image-modal {
+                top: 10px;
+                right: 10px;
             }
         }
     </style>
@@ -198,26 +510,213 @@
     <section id="projects" class="container">
         <h2>Proyectos Destacados</h2>
         <div class="projects-grid">
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 1">
+             <!-- Proyecto 1 con video -->
+             <div class="project-card" onclick="openVideo('Portafolio/Videos promocionales/PM Aniversario.mp4')">
+                <img src="Portafolio/Videos promocionales/cap1.png" alt="Video proyecto Pet Market">
+                <div class="play-icon">▶</div>
                 <div class="project-info">
-                    <h3>Branding Corporativo</h3>
-                    <p>Diseño de identidad visual para GRN Seguridad Privada</p>
+                    <h3>Línea de tiempo</h3>
+                    <p>Diseño de video que recapitula la historia de Pet Market</p>
+                    <span class="video-label">Ver video</span>
                 </div>
             </div>
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 2">
+            <div class="project-card" onclick="openVideo('Portafolio/Videos promocionales/PM BF.mp4')">
+                <img src="Portafolio/Videos promocionales/cap2.png" alt="Video proyecto Pet Market">
+                <div class="play-icon">▶</div>
                 <div class="project-info">
                     <h3>Campaña Digital</h3>
-                    <p>Estrategia de redes sociales para Cabo Servicios Aduanales</p>
+                    <p>Estrategia de redes sociales para Pet Market</p>
+                    <span class="video-label">Ver video</span>
                 </div>
             </div>
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 3">
+            <div class="project-card" onclick="openVideo('Portafolio/Videos promocionales/Wedding.mov')">
+                <img src="Portafolio/Videos promocionales/Wedding Cap.png" alt="Bodas">
+                <div class="play-icon">▶</div>
                 <div class="project-info">
-                    <h3>Diseño Web</h3>
-                    <p>Maquetación responsive para sitio e-Commerce</p>
+                    <h3>Campaña Digital</h3>
+                    <p>Estrategia de redes sociales para Pet Market</p>
+                    <span class="video-label">Ver video</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Manual de Identidad -->
+    <section id="manual-identidad" class="container">
+        <h2>Manual de Identidad</h2>
+        <div class="slideshow-container">
+            <!-- Slides -->
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-01.jpg" alt="Manual de Identidad Página 1">
+                <div class="slide-caption">
+                    <h3>Portada y Fundamentos</h3>
+                    <p>Conceptos base de la identidad corporativa</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-10.jpg" alt="Manual de Identidad Página 2">
+                <div class="slide-caption">
+                    <h3>Logotipo</h3>
+                    <p>Construcción y variantes permitidas</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-11.jpg" alt="Manual de Identidad Página 3">
+                <div class="slide-caption">
+                    <h3>Logotipo</h3>
+                    <p>Área segura</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-12.jpg" alt="Manual de Identidad Página 4">
+                <div class="slide-caption">
+                    <h3>Logotipo</h3>
+                    <p>Variaciones</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-13.jpg" alt="Manual de Identidad Página 5">
+                <div class="slide-caption">
+                    <h3>Paleta de colores</h3>
+                    <p>Colores primarios y complementarios</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-14.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Tipografías</h3>
+                    <p>Familias permitidas</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-15.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Aplicaciones</h3>
+                    <p>Hoja membretada</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-16.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Aplicaciones</h3>
+                    <p>Tarjeta de presentación</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-17.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Aplicaciones</h3>
+                    <p>Gafete de identificación</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-18.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Aplicaciones</h3>
+                    <p>Redes sociales</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="Portafolio/Manual de identidad/GRN MI-19.jpg" alt="Manual de Identidad Página 22">
+                <div class="slide-caption">
+                    <h3>Aplicaciones</h3>
+                    <p>Dispositivos</p>
+                </div>
+            </div>
+            
+            <!-- Controles -->
+            <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+            <a class="next" onclick="moveSlide(1)">&#10095;</a>
+        </div>
+        <!-- Puntos indicadores -->
+        <div class="dots-container" id="dots-container"></div>
+    </section>
+
+    <!-- Sección Logos -->
+    <section id="logos" class="container">
+        <h2>Diseño de Logos</h2>
+        <div class="logos-grid">
+            <div class="logo-item">
+                <img src="Portafolio/Logos/360fs.png" alt="Logo 360fs">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/DUCENS wh.jpg" alt="Logo DUCENS">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/einen.jpg" alt="Logo einen">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/intro.jpg" alt="Logo intro">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/ls.png" alt="Logo ls">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/LSS.jpeg" alt="Logo LSS">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/PM.jpg" alt="Logo PM">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/reve.png" alt="Logo reve">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/Xteam-01.png" alt="Logo Xteam">
+            </div>
+            <div class="logo-item">
+                <img src="Portafolio/Logos/YT.png" alt="Logo YT">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Redes Sociales -->
+    <section id="redes-sociales" class="container">
+        <h2>Posts para Redes Sociales</h2>
+        <div class="redes-grid">
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/360-photo-Gallery-template-6-01.jpg" alt="Post 360">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/calefacción.png" alt="Post calefacción">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/lss01.jpg" alt="Post LSS 1">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/lss02.jpg" alt="Post LSS 2">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/lss03.jpg" alt="Post LSS 3">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/lss04.jpg" alt="Post LSS 4">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/lss05.jpg" alt="Post LSS 5">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/motion graphics.png" alt="Motion graphics">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/PM01.jpeg" alt="Post PM 1">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/PM02.jpeg" alt="Post PM 2">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/PM03.jpeg" alt="Post PM 3">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/PM04.jpeg" alt="Post PM 4">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/pm05.jpeg" alt="Post PM 5">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/PM06.jpeg" alt="Post PM 6">
+            </div>
+            <div class="redes-item">
+                <img src="Portafolio/Redes Sociales/tmd.png" alt="Post TMD">
             </div>
         </div>
     </section>
@@ -232,27 +731,95 @@
         </div>
     </section>
 
+    <!-- Modal de Video -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <video controls id="projectVideo">
+                Tu navegador no soporta videos HTML5.
+            </video>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; <span id="currentyear"></span> Esau Leal | Todos los derechos reservados</p>
         </div>
     </footer>
+    <div class="image-modal" id="imageModal">
+        <div class="image-container">
+            <span class="close-image-modal" onclick="closeImageModal()">&times;</span>
+            <img id="expandedImage" src="" alt="Imagen ampliada">
+        </div>
+    </div>
 
     <script>
-        window.addEventListener('load',(currentyear)=>{
-    date = new Date();
-    document.querySelector("#currentyear").textContent = date.getFullYear();
-});
-//Alternar modo oscuro/nocturno
-document.querySelector('.sonar-effect').addEventListener('click', function() {
-    document.body.classList.toggle('night-vision');
-    // (Necesitarías definir la clase .night-vision en tu CSS)
-});
+        // Configuración del año actual
+        document.getElementById('currentyear').textContent = new Date().getFullYear();
+
+        // JavaScript del Slideshow
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        
+        // Crear puntos indicadores dinámicamente
+        function createDots() {
+            const dotsContainer = document.getElementById('dots-container');
+            const slides = document.getElementsByClassName('slide');
+            
+            for (let i = 0; i < slides.length; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.addEventListener('click', () => {
+                    currentSlide(i + 1);
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        // Llamar a createDots cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', createDots);
+        
+        // Control manual
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let i;
+            const slides = document.getElementsByClassName('slide');
+            const dots = document.getElementsByClassName('dot');
+            
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(' active', '');
+            }
+            
+            slides[slideIndex-1].style.display = 'block';
+            if (dots[slideIndex-1]) {
+                dots[slideIndex-1].className += ' active';
+            }
+        }
+        
+        // Auto-slide cada 5 segundos (opcional)
+        setInterval(() => {
+            moveSlide(1);
+        }, 5000);
+
         // JS para efectos interactivos
         document.addEventListener('DOMContentLoaded', function() {
             // Animación al hacer scroll
             const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.skill-card, .project-card');
+                const elements = document.querySelectorAll('.skill-card, .project-card, .logo-item, .redes-item');
                 
                 elements.forEach(element => {
                     const elementPosition = element.getBoundingClientRect().top;
@@ -266,7 +833,7 @@ document.querySelector('.sonar-effect').addEventListener('click', function() {
             };
             
             // Inicializar opacidad para animación
-            document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+            document.querySelectorAll('.skill-card, .project-card, .logo-item, .redes-item').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
                 el.style.transition = 'all 0.6s ease';
@@ -274,6 +841,107 @@ document.querySelector('.sonar-effect').addEventListener('click', function() {
             
             window.addEventListener('scroll', animateOnScroll);
             animateOnScroll(); // Ejecutar al cargar
+        });
+        
+        // Función para abrir video
+        function openVideo(videoSrc) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('projectVideo');
+            
+            // Detener cualquier video que esté reproduciéndose
+            video.pause();
+            
+            // Establecer la nueva fuente del video
+            video.src = videoSrc;
+            
+            // Mostrar el modal
+            modal.classList.add('active');
+            
+            // Intentar reproducir automáticamente (puede ser bloqueado por el navegador)
+            const playPromise = video.play();
+            
+            // Manejar posibles errores de reproducción automática
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Reproducción iniciada automáticamente
+                })
+                .catch(error => {
+                    // Reproducción automática falló, mostrar controles
+                    video.controls = true;
+                });
+            }
+            
+            // Pausar video al hacer clic fuera del contenedor
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeVideo();
+                }
+            });
+        }
+        
+        // Función para cerrar video
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('projectVideo');
+            
+            video.pause();
+            video.currentTime = 0;
+            video.controls = false;
+            modal.classList.remove('active');
+        }
+        
+        // Permitir cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideo();
+            }
+        });
+        // Función para abrir imagen en modal
+        function openImageModal(imgSrc, altText) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('expandedImage');
+            
+            img.src = imgSrc;
+            img.alt = altText;
+            modal.classList.add('active');
+            
+            // Cerrar al hacer clic fuera de la imagen
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeImageModal();
+                }
+            });
+        }
+        
+        // Función para cerrar el modal de imagen
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+        
+        // Permitir cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+                closeVideo();
+            }
+        });
+
+        // Asignar eventos de clic a todas las imágenes de logos y redes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Logos
+            document.querySelectorAll('.logo-item img').forEach(img => {
+                img.addEventListener('click', function() {
+                    openImageModal(this.src, this.alt);
+                });
+            });
+            
+            // Redes sociales
+            document.querySelectorAll('.redes-item img').forEach(img => {
+                img.addEventListener('click', function() {
+                    openImageModal(this.src, this.alt);
+                });
+            });
         });
     </script>
 </body>

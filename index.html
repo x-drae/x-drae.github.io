@@ -499,6 +499,30 @@ footer {
         <!-- Puntos indicadores -->
         <div class="dots-container" id="dots-container"></div>
     </section>
+    <section id="ux-ui" class="container">
+    <h2>UX/UI</h2>
+    <div class="redes-grid">
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/login.png" alt="UX/UI 1" onclick="openImageModal(this.src)">
+      </div>
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/mainpage.jpg" alt="UX/UI 2" onclick="openImageModal(this.src)">
+      </div>
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/query.jpg" alt="UX/UI 3" onclick="openImageModal(this.src)">
+      </div>
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/form.jpg" alt="UX/UI 4" onclick="openImageModal(this.src)">
+      </div>
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/login-gob.PNG" alt="UX/UI 5" onclick="openImageModal(this.src)">
+      </div>
+      <div class="redes-item">
+        <img src="Portafolio/Infografías y formularios/login.png" alt="UX/UI 6" onclick="openImageModal(this.src)">
+      </div>
+    </div>
+  
+</section>
 
     <!-- Sección Logos -->
     <section id="logos" class="container">
@@ -620,6 +644,13 @@ footer {
             <img id="expandedImage" src="" alt="Imagen ampliada">
         </div>
     </div>
+    <!-- Modal de imagen para UX/UI -->
+<div class="image-modal" id="imageModal">
+  <div class="image-container">
+    <span class="close-image-modal" onclick="closeImageModal()">&times;</span>
+    <img src="" alt="Vista previa" id="modalImage">
+  </div>
+</div>
 
     <script>
         // Configuración del año actual
